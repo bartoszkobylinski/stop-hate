@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return "<p>I'm in</p>"
+    return render_template("index.html")
