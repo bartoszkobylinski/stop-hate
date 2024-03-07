@@ -5,6 +5,15 @@
     <title>Stop hate</title>
 </head>
 <body>
-    <p> Here comes the dashboard of my app</p>
+
+    <h1> Instagram API</h1>
+
+    {% if ig.has_user_access_token %}
+    <h3> Instagram info</h3>
+    <pre>{{user | tojson}}</pre>
+    <p>username:  {{ user.username }}</p>
+    <p>user id: {{user.id}}</p>
+    <p>media count: {{user.media_count}}</p>
+    <p>account type: {{user.account_type}}</p>
 </body>
 </html>
