@@ -9,6 +9,7 @@ class InstagramBasicDisplayAPI:
         self.redirect_uri = params.get("INSTAGRAM_APP_REDIRECT_URI")
         self.get_code = params.get("get_code", '')
         self.api_base_url = 'https://api.instagram.com/'
+        self.graph_base_url = 'https://graph.instagram.com'
         self.authorization_url = None
         self.user_access_token = ""
         self.has_user_access_token = False
@@ -48,7 +49,40 @@ class InstagramBasicDisplayAPI:
         return response.json()
 
     def get_long_lived_user_access_token(self):
-        pass
+        endpoint_url = f"{self.graph_base_url}access_token"
+        params = {
+            "client_secret": self.app_secret,
+            "grant_type": "ig_exchange_token",
+            "access_token": self.user_access_token
+        }
+        response = requests.get(endpoint_url, params=params)
+        return response.json()
+
+    def make_api_call(self, params):
+        endpoint = params['endpoint_url']
+        if params['type'] == 'POST':
+            response = requests.post(endpoint, data=params['url_params'])
+        else:
+            if not params.get('url_params', {}).get('paging', False):
+                params['url_params']['access_token'] = self.user_access_token
+                endpoint +=f"?{requests.compat.urlencode(params['url_params'])}"
+            response = requests.get(endpoint)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            response.raise_for_status()
+
+    def get_user(self):
+        endopoint_url = f"{self.graph_base_url}me"
+        params = {
+            'type': 'GET',
+            'endpoint_url': endopoint_url,
+            'url_params': {
+                'fields': "id_username,media_count,account_type",
+            }
+        }
+        return self.make_api_call(params)
 
 
 
@@ -61,5 +95,5 @@ params = {
 
 api = InstagramBasicDisplayAPI(params)
 
-print(api)
+print(api.get_user())
 api.set_authorization_url()
