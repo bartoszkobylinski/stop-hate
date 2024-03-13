@@ -74,7 +74,7 @@ class InstagramBasicDisplayAPI:
             response.raise_for_status()
 
     def get_user(self):
-        endopoint_url = f"{self.graph_base_url}me"
+        endopoint_url = f"{self.graph_base_url}/me"
         params = {
             'type': 'GET',
             'endpoint_url': endopoint_url,
