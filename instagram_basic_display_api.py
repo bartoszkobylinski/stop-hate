@@ -65,7 +65,7 @@ class InstagramBasicDisplayAPI:
         else:
             if not params.get('url_params', {}).get('paging', False):
                 params['url_params']['access_token'] = self.user_access_token
-                endpoint +=f"?{requests.compat.urlencode(params['url_params'])}"
+                endpoint += f"?{requests.compat.urlencode(params['url_params'])}"
             response = requests.get(endpoint)
 
         if response.status_code == 200:
@@ -83,7 +83,6 @@ class InstagramBasicDisplayAPI:
             }
         }
         return self.make_api_call(params)
-
 
 
 params = {
