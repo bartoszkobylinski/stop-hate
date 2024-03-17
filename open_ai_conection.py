@@ -1,6 +1,9 @@
 import openai
 import os
 
+system_api_key = os.getenv("SYSTEM_API_KEY")
+user_apki_key = os.getenv("USER_API_KEY")
+
 def request_open_ai(prompt, api_key, sys_prompt):
     openai.api_key = api_key
     completion = openai.ChatCompletion.create(
