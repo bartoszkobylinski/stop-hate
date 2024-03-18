@@ -15,6 +15,9 @@ def get_user_media(access_token, user_id, url):
         return f"Error: {response.text}"
 
 
+
+
+
 media = get_user_media(access_token, user_id, url)
 
 print(json.dumps(media, indent=1))

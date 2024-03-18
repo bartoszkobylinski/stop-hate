@@ -64,6 +64,11 @@ def logout():
     flash("You have been logged out.")
     return redirect(url_for('index'))
 
+@app.route("/user-media")
+@login_required
+def user_media():
+    return render_template("user-media.html")
+
 
 if __name__ == '__main__':
     with app.app_context():
