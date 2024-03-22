@@ -32,3 +32,13 @@ class TweeterCLient:
         except Exception as error:
             return {"error": str(error)}
 
+    def post_comment(self, tweet_id, comment_text):
+        try:
+            tweet_to_reply = self.api.get_status(tweet_id)
+            username = tweet_to_reply.user.screen_name
+            full_text = f"@{username} {comment_text}"
+            tweet = self.api.update_status(status=full_text, in_reply_to_status_id=tweet_id, auto_populate_reply_metadata=True)
+            return tweet
+        except Exception as e:
+            print(f"Error: {e}")
+
