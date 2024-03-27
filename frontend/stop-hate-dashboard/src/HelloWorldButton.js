@@ -6,7 +6,7 @@ function HelloWorldButton(){
     };
 
     return (
-        <button onClick={handleClick}>Click Me</button>
+        <button onClick={handleClick}>Oh, not today! Not even second to code. Apparently, i had 60 second to add this :)</button>
     );
 }
 
