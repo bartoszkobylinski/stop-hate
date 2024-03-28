@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import HelloWorldButton from "./HelloWorldButton";
+import Dashboard from "./Dashboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           Learn React
         </a>
         <HelloWorldButton />
+        <Dashboard />
 
       </header>
     </div>
