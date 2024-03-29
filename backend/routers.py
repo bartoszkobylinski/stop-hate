@@ -43,4 +43,8 @@ def init_app_routes(app):
     def user_media():
         return render_template("user-media.html")
 
+    @app.route("/my-page")
+    @login_required
+    def my_page():
+        return render_template("my_page.html")
 
