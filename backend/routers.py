@@ -68,3 +68,8 @@ def init_app_routes(app):
     def my_page():
         return render_template("my_page.html")
 
+
+    @app.route("/some_endpoint")
+    def some_endpoint():
+        return render_template("some_endpoint.html")
+
