@@ -1,9 +1,14 @@
 import os
 
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from user import User
 from instagram_basic_display_api import InstagramBasicDisplayAPI
+
+def get_current_user():
+    if current_user.is_authenticated:
+        return current_user
+    return None
 
 def init_app_routes(app):
     @app.route("/")
@@ -73,3 +78,13 @@ def init_app_routes(app):
     def some_endpoint():
         return render_template("some_endpoint.html")
 
+    @app.route("/admin")
+    @login_required
+    def admin():
+        current_user = get_current_user()
+        if not current_user.is_admin:
+            flash("Unauthorized access.")
+            return redirect(url_for("main"))
+
+        users = User.query.all()
+        return render_template("admin", users=users)
