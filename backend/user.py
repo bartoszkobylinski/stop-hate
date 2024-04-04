@@ -4,6 +4,7 @@ from backend.database import db
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    is_admin = db.Column(db.Boolean, default=True)
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     tokens_used = db.Column(db.Integer, default=0)
