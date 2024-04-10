@@ -13,3 +13,11 @@ def get_user_info_and_posts(username, endpoint, access_token):
     else:
         print(f"Failed to retreve data: {response.status_code}")
 
+def get_user_info():
+    pass
+
+def get_user_media():
+    pass
+
+def get_user_post():
+    pass
