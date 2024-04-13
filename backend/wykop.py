@@ -10,3 +10,10 @@ def get_wykop_user_info(username, api_key):
         return response.json()
     else:
         return {"error": "Failed to retrieve user information"}
+
+
+def get_wykop_user_posts(username, api_key):
+    url = ''
+    response = requests.get(url)
+
+    return response.json()
