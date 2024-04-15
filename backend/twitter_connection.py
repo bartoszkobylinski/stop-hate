@@ -8,7 +8,7 @@ class TweeterCLient:
         api_key = os.getenv("API_KEy")
         api_secret = os.getenv("API_SECRET_KEY")
         access_token = os.getenv("ACCESS_TOKEN")
-        access_token_secret = os.getenv("ACCES_TOKEN_SECRET")
+        access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
         auth = tweepy.OAuthHandler(api_key, api_secret)
         auth.set_access_token(access_token, access_token_secret)
