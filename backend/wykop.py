@@ -1,19 +1,24 @@
 import requests
 
+class WykopAPI:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://a2.wykop.pl"
 
-def get_wykop_user_info(username, api_key):
-    url = f"https://a2.wykop.pl/Users/Profile/{username}/appkey/{api_key}"
+    def get_user_info(self, username):
+        url = f"{self.base_url}/Users/Profile/{username}/appkey/{self.api_key}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": "Failed to retrieve user information"}
 
-    response = requests.get(url)
+    def get_user_posts(self, username):
+        url = f"{self.base_url}/Entries/Index/{username}/appkey/{self.api_key}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": "Failed to retrieve user posts"}
 
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {"error": "Failed to retrieve user information"}
 
-
-def get_wykop_user_posts(username, api_key):
-    url = ''
-    response = requests.get(url)
-
-    return response.json()
