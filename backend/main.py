@@ -10,15 +10,26 @@ class InstagramMediaFetcher:
 
     def get_user_media(self):
         url = f"{self.base_url}?fields=id,caption&access_token={self.access_token}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            return response.json()['data']
-        else:
-            return f"Error: {response.text}"
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            try:
+                return response.json()['data']
+            except KeyError:
+                return f"Error: Malformed JSON response, missing expected 'data' key."
+            except json.JSONDecodeError:
+                return f"Error: Failed to parse JSON from response."
+        except requests.exceptions.HTTPError as e:
+            return f"Error: {e.response.status_code} - {e.response.text}"
+        except requests.exceptions.RequestException as e:
+            return f"Error: Network or request error - {e}"
 
     def print_media(self):
         media = self.get_user_media()
-        print(json.dumps(media, indent=1))
+        if isinstance(media, list):
+            print(json.dumps(media, indent=1))
+        else:
+            print(media)
 
 
 if __name__ == "__main__":
