@@ -19,10 +19,10 @@ class InstagramMediaFetcher:
                 return f"Error: Malformed JSON response, missing expected 'data' key."
             except json.JSONDecodeError:
                 return f"Error: Failed to parse JSON from response."
-        except requests.exceptions.HTTPError as e:
-            return f"Error: {e.response.status_code} - {e.response.text}"
-        except requests.exceptions.RequestException as e:
-            return f"Error: Network or request error - {e}"
+        except requests.exceptions.HTTPError as error:
+            return f"Error: {error.response.status_code} - {error.response.text}"
+        except requests.exceptions.RequestException as error:
+            return f"Error: Network or request error - {error}"
 
     def print_media(self):
         media = self.get_user_media()
