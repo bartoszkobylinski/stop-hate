@@ -14,7 +14,7 @@ class WykopAPI:
             return {"error": "Failed to retrieve user information"}
 
     def get_user_posts(self, username):
-        url = f"{self.base_url}/Entries/Index/{username}/appkey/{self.api_key}"
+        url = f"{self.base_url}/Entries/Index/{username}/app_key/{self.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
             return response.json()
